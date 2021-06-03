@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import Logo from "../../olx-logo.png";
 import "./Login.css";
 import { FirebaseContext } from "../../store/Context";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +53,9 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          Signup
+        </Link>
       </div>
     </div>
   );
