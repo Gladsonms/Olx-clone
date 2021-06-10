@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Heart from "../../assets/Heart";
 import { FirebaseContext } from "../../store/Context";
+import Post, { PostContext } from "../../store/PostContext";
 import "./Post.css";
 
 function Posts() {
   const { firebase } = useContext(FirebaseContext);
   const [products, setProducts] = useState([]);
+  const { setpostDetails } = useContext(PostContext);
+  const history = useHistory();
   useEffect(() => {
     firebase
       .firestore()
@@ -32,7 +37,13 @@ function Posts() {
         <div className="cards">
           {products.map((product) => {
             return (
-              <div className="card">
+              <div
+                className="card"
+                onClick={() => {
+                  history.push("/view");
+                  setpostDetails(product);
+                }}
+              >
                 <div className="favorite">
                   <Heart></Heart>
                 </div>
