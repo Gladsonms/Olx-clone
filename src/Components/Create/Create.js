@@ -2,8 +2,10 @@ import React, { Fragment, useContext, useState } from "react";
 import "./Create.css";
 import Header from "../Header/Header";
 import { FirebaseContext, AuthContext } from "../../store/Context";
+import { useHistory } from "react-router";
 
 const Create = () => {
+  const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -27,6 +29,7 @@ const Create = () => {
             userId: user.uid,
             createdAt: date.toDateString(),
           });
+          history.push("/");
         });
       });
   };
@@ -61,7 +64,14 @@ const Create = () => {
           <br />
           <label htmlFor="fname">Price</label>
           <br />
-          <input className="input" type="number" id="fname" name="Price" />
+          <input
+            className="input"
+            type="number"
+            id="fname"
+            name="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
           <br />
 
           <br />
